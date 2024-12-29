@@ -1,24 +1,16 @@
-import express, { Request, Response } from 'express';
-import { createServer as createViteServer } from 'vite';
+import express from 'express';
 
-async function startServer() {
-  const app = express();
+const app = express();
 
-  // Configurar Vite como middleware
-  const vite = await createViteServer({
-    server: { middlewareMode: true },
-  });
-  app.use(vite.middlewares);
+app.get('/', (req, res) => {
+  res.send('Hello from Express with TypeScript!');
+});
 
-  // Rotas do Express
-  app.get('/api', (req: Request, res: Response) => {
-    res.json({ message: 'Hello from Express with TypeScript!' });
-  });
 
-  // Iniciar o servidor
-  app.listen(3000, () => {
-    console.log('Server is running at http://localhost:3000');
-  });
-}
+app.get('/api', (req, res) => {
+  res.json({ message: 'Hello from Express with TypeScript!' });
+});
 
-startServer();
+app.listen(3000, () => {
+  console.log('Server is running at http://localhost:3000');
+});
